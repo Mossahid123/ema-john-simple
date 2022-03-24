@@ -3,7 +3,10 @@
     grid-template-columns: 4fr 1fr;
 }
 .shopping-container{
+    margin-top: 120px;
+    margin-left: 30px;
+    margin-right: 30px;
     display: grid;
     grid-template-columns: repeat(3,1fr);
-    gap: 50px;
+    gap: 30px;
 }
