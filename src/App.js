@@ -5,6 +5,9 @@ import { Route, Routes } from 'react-router-dom';
 import Orders from './components/Orders/Orders';
 import Inventory from './components/Inventory/Inventory';
 import About from './components/About/About';
+import Login from './components/Login/Login';
+import SingUp from './components/SingUp/SingUp';
+
 
 
 function App() {
@@ -17,6 +20,8 @@ function App() {
        <Route path='/orders' element={<Orders></Orders>}></Route>
        <Route path='/Inventory' element={<Inventory></Inventory>}></Route>
        <Route path='/about' element={<About></About>}></Route>
+       <Route path='/login' element={<Login></Login>}></Route>
+      <Route path='/singup' element={<SingUp></SingUp>}></Route>
      </Routes>
     </div>
   );
