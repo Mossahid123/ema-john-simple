@@ -1,11 +1,15 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import auth from '../../firebase.init'
 
 const SingUp = () => {
-    const [email ,setEmail] =useState();
-    const [password , setPassword] =useState();
-    const [confirmPassword , setConfirmPassword] =useState();
-    const [error , setError] =useState();
+    const [email ,setEmail] =useState('');
+    const [password , setPassword] =useState('');
+    const [confirmPassword , setConfirmPassword] =useState('');
+    const [error , setError] =useState('');
+    const [createUserWithEmailAndPassword ,user] = useCreateUserWithEmailAndPassword(auth);
+    const navigate = useNavigate();
 
     const handleEmail =event =>{
         setEmail(event.target.value)
@@ -16,12 +20,20 @@ const SingUp = () => {
     const handleConfirmPassword = event =>{
         setConfirmPassword(event.target.value)
     }
+    if(user){
+        navigate('/shop')
+    }
     const handleCreateUser = event =>{
         event.preventDefault();
+        if(password.lenght <6){
+            setError('Your password should be more than 6 characters')
+            return;
+        }
         if(password!==confirmPassword){
             setError("your two password didn't match")
             return;
         }
+        createUserWithEmailAndPassword(email ,password)
     }
     return (
         <div className='form-container'>
@@ -41,7 +53,7 @@ const SingUp = () => {
                         <input onBlur={handleConfirmPassword} type="password" name='Confirm Password' required/>
                     </div>
                     <p style={{color:'red'}}>{error}</p>
-                    <input className='form-submit' type="submit" value="Login" />
+                    <input className='form-submit' type="submit" value="SingUp" />
                 </form>
                 <p>
                     New to ema-john?<Link className='form-link' to='/login'>Login</Link>
